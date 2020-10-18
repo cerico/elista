@@ -1,8 +1,10 @@
 # TLDR
 
-copy `bin/setup.sh` into bin folder
+copy `bin/build-elista.sh` into bin folder
 
 copy `config/elista.env.example` into config folder, edit values to fit your setup and rename to `config/elista.env`
+
+run `./bin/build-elista.sh`
 
 # Pre-requisites
 
