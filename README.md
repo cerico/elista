@@ -4,7 +4,9 @@ copy `bin/build-elista.sh` into bin folder
 
 copy `config/elista.env.example` into config folder, edit values to fit your setup and rename to `config/elista.env`
 
-run `./bin/build-elista.sh`
+run `./bin/build-elista.sh` to create elista script
+
+run `./bin/elista.sh` to deploy
 
 # Pre-requisites
 
