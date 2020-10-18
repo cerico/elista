@@ -6,6 +6,9 @@ cp config/database.yml config/database.yml.bk
 rm config/credentials.yml.enc
 rm config/master.key
 RAILS_ENV=production EDITOR=vim rails credentials:edit
+git add config/credentials.yml.enc config/database.yml .gitignore
+git commit -m "creds"
+git push origin main
 cat <<EOTF > config/nginx/$app_name.conf
 server {
   listen 80;
@@ -44,9 +47,6 @@ RAILS_ENV=production ./bin/rake db:migrate
 RAILS_ENV=production ./bin/rake db:seed
 RAILS_ENV=production rails assets:precompile
 cp -r config/nginx/* $local_nginx_location
-git add config/credentials.yml.enc config/database.yml .gitignore
-git commit -m "added by Elista"
-git push origin $branch
 brew services restart nginx
 EOTF
 chmod a+x bin/elista.local.sh
