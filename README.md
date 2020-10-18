@@ -37,4 +37,10 @@ You can now run `./bin/elista.sh` based on your specific setup to deploy
 
 The nginx conf file is uploaded to your nginx directory as part of the elista process
 
+### elista.local.sh
 
+TODO If you want to run locally
+
+### Conventions
+
+Directory name should be same as repo name, for now
