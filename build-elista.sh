@@ -20,7 +20,7 @@ server {
   passenger_enabled on;
   passenger_app_env production;
   passenger_friendly_error_pages on;
-  passenger_ruby $remote_ruby_location;
+  passenger_ruby ${remote_rbenv}/shims/ruby;
 
   location /cable {
     passenger_app_group_name ${app_name}_websocket;
@@ -51,17 +51,27 @@ ssh $user@$server -i $key << EOF
     git pull origin $branch
     which ruby
     rbenv versions
-    rbenv local `cat .ruby-version`
-    if [ $? -ne 0 ]
+    if [ -d ${remote_rbenv}/versions/`cat .ruby-version` ]
       then
+      rbenv local `cat .ruby-version`
+    else
       rbenv install `cat .ruby-version`
       rbenv local `cat .ruby-version`
     fi
     bundle update
     bundle install
+    yarn install --check-files
     RAILS_ENV=production bundle exec rake db:migrate
   else
     git clone $repo $app_name
+    cd $app_name
+    if [ -d ${remote_rbenv}/versions/`cat .ruby-version` ]
+      then
+      rbenv local `cat .ruby-version`
+    else 
+      rbenv install `cat .ruby-version`
+      rbenv local `cat .ruby-version`
+    fi
   fi
 EOF
 ssh -q $user@$server -i $key  "[[ -f $remote_app_location/$app_name/config/master.key ]]"
@@ -84,6 +94,7 @@ ssh $user@$server -i $key << EOF
   password=\`echo 'Rails.application.credentials.production[:db_password]' | RAILS_ENV=production bundle exec rails c | tail -2 | head -1 | tr -d '"'\`
   sudo -u postgres psql -c "CREATE user $app_name PASSWORD '\$password' createdb";
   bundle install
+  yarn install --check-files
   RAILS_ENV=production ./bin/rake db:create
   RAILS_ENV=production ./bin/rake db:migrate
   RAILS_ENV=production ./bin/rake db:seed
