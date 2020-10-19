@@ -3,11 +3,11 @@ source config/elista.env
 mkdir -p config/nginx
 echo config/elista.env >> .gitignore
 cp config/database.yml config/database.yml.bk
-rm config/credentials.yml.enc
+mv config/credentials.yml.enc config/credentials.yml.enc.bkup.$(date +'%s')
 rm config/master.key
 RAILS_ENV=production EDITOR=vim rails credentials:edit
 git add config/credentials.yml.enc config/database.yml .gitignore
-git commit -m "creds"
+git commit -m "Credentials and Database updated by Elista"
 git push origin main
 cat <<EOTF > config/nginx/$app_name.conf
 server {
