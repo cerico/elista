@@ -10,13 +10,21 @@ run `./bin/elista.sh` to deploy
 
 # Pre-requisites
 
+Webserver must have the following
+
 Rails
 
 Rbenv [HOWTO]https://www.digitalocean.com/community/tutorials/how-to-install-ruby-on-rails-with-rbenv-on-ubuntu-18-04
 
 Postgres
 
+NodeJS
+
+Yarn
+
 Nginx with Passenger enabled on your server [HOWTO]https://www.phusionpassenger.com/library/install/nginx/install/oss/bionic/
+
+Correct version of bundler (can find with `grep BUNDLED Gemfile.lock -A2 | tail -1`)
 
 # Info
 
