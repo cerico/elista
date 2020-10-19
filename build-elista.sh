@@ -51,7 +51,7 @@ ssh $user@$server -i $key << EOF
     git pull origin $branch
     which ruby
     rbenv versions
-    rbenv local 2.6.5
+    rbenv local $ruby_version
     bundle update
     bundle install
     RAILS_ENV=production bundle exec rake db:migrate
