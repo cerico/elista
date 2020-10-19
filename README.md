@@ -12,11 +12,11 @@ run `./bin/elista.sh` to deploy
 
 Rails
 
-Rbenv
+Rbenv [HOWTO]https://www.digitalocean.com/community/tutorials/how-to-install-ruby-on-rails-with-rbenv-on-ubuntu-18-04
 
 Postgres
 
-Nginx with Passenger enabled on your server
+Nginx with Passenger enabled on your server [HOWTO]https://www.phusionpassenger.com/library/install/nginx/install/oss/bionic/
 
 # Info
 
