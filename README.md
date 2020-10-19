@@ -4,7 +4,7 @@ copy `build-elista.sh` into your applications' bin folder
 
 copy `elista.env.example` into your applications config folder, edit values to fit your setup and rename to `elista.env`
 
-run `./bin/build-elista.sh` in your applications to create the elista script
+run `./bin/build-elista.sh` in your application to create the elista script
 
 run `./bin/elista.sh` to deploy
 
@@ -20,7 +20,10 @@ Nginx with Passenger enabled on your server
 
 # Info
 
-`./bin/create.sh` creates three files, `./bin/elista.local.sh`, `./bin/elista.sh`, and `./config/nginx/*.conf`. It also edits our credentials file in production mode, where we can add our production db password
+On first run, Elista deploys your application, sets up your database user, creates and migrates your database, and configures nginx so your application is available on your specified URL.
+
+
+`./bin/build-elista.sh` creates two files, `./bin/elista.sh`, and `./config/nginx/*.conf`. It also edits our credentials file in production mode, where we can add our production db password
 
 ### credentials.yml.enc
 
@@ -39,6 +42,8 @@ You can now run `./bin/elista.sh` based on your specific setup to deploy
 
 The nginx conf file is uploaded to your nginx directory as part of the elista process
 
-### elista.local.sh
+### TODO
 
-If you want to run production locally with nginx TODO
+1) Install letsencrypt so applications available on 443
+
+2) Switch ruby version on web server where necessary, and install if not available

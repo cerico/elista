@@ -37,19 +37,6 @@ server {
 }
 EOTF
 
-cat <<EOTF > bin/elista.local.sh
-source config/elista.env
-echo "  password: <%= Rails.application.credentials.production[:db_password] %>" >> config/database.yml
-password=\`echo 'Rails.application.credentials.production[:db_password]' | RAILS_ENV=production bundle exec rails c | tail -2 | head -1 | tr -d '"'\`
-psql -c "CREATE user $app_name PASSWORD '\$password' createdb";
-RAILS_ENV=production ./bin/rake db:create
-RAILS_ENV=production ./bin/rake db:migrate
-RAILS_ENV=production ./bin/rake db:seed
-RAILS_ENV=production rails assets:precompile
-cp -r config/nginx/* $local_nginx_location
-brew services restart nginx
-EOTF
-chmod a+x bin/elista.local.sh
 cat <<EOTF > bin/elista.sh
 source config/elista.env
 
