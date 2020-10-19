@@ -1,10 +1,10 @@
 # TLDR
 
-copy `bin/build-elista.sh` into bin folder
+copy `build-elista.sh` into your applications' bin folder
 
-copy `config/elista.env.example` into config folder, edit values to fit your setup and rename to `config/elista.env`
+copy `elista.env.example` into your applications config folder, edit values to fit your setup and rename to `elista.env`
 
-run `./bin/build-elista.sh` to create elista script
+run `./bin/build-elista.sh` in your applications to create the elista script
 
 run `./bin/elista.sh` to deploy
 
@@ -16,7 +16,7 @@ Rbenv
 
 Postgres
 
-Nginx with Passenger enabled
+Nginx with Passenger enabled on your server
 
 # Info
 
@@ -41,8 +41,4 @@ The nginx conf file is uploaded to your nginx directory as part of the elista pr
 
 ### elista.local.sh
 
-TODO If you want to run locally
-
-### Conventions
-
-Directory name should be same as repo name, for now
+If you want to run production locally with nginx TODO
