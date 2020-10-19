@@ -69,7 +69,7 @@ ssh $user@$server -i $key << EOF
     bundle install
     RAILS_ENV=production bundle exec rake db:migrate
   else
-    git clone $repo
+    git clone $repo $app_name
   fi
 EOF
 ssh -q $user@$server -i $key  "[[ -f $remote_app_location/$app_name/config/master.key ]]"
