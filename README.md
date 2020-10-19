@@ -23,7 +23,7 @@ Nginx with Passenger enabled on your server
 On first run, Elista deploys your application, sets up your database user, creates and migrates your database, and configures nginx so your application is available on your specified URL.
 
 
-`./bin/build-elista.sh` creates two files, `./bin/elista.sh`, and `./config/nginx/*.conf`. It also edits our credentials file in production mode, where we can add our production db password
+`./bin/build-elista.sh` creates two files, `./bin/elista.sh`, and `./config/nginx/*.conf`. It also edits your credentials file in production mode, where we can add your production db password
 
 ### credentials.yml.enc
 
