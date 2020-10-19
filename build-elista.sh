@@ -8,7 +8,7 @@ rm config/master.key
 RAILS_ENV=production EDITOR=vim rails credentials:edit
 git add config/credentials.yml.enc config/database.yml .gitignore
 git commit -m "Credentials and Database updated by Elista"
-git push origin main
+git push origin $branch
 cat <<EOTF > config/nginx/$app_name.conf
 server {
   listen 80;
