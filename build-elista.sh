@@ -6,6 +6,7 @@ cp config/database.yml config/database.yml.bk
 mv config/credentials.yml.enc config/credentials.yml.enc.bkup.$(date +'%s')
 rm config/master.key
 RAILS_ENV=production EDITOR=vim rails credentials:edit
+echo "  password: <%= Rails.application.credentials.production[:db_password] %>" >> config/database.yml
 git add config/credentials.yml.enc config/database.yml .gitignore
 git commit -m "Credentials and Database updated by Elista"
 git push origin $branch
@@ -58,9 +59,12 @@ ssh $user@$server -i $key << EOF
       rbenv install `cat .ruby-version`
       rbenv local `cat .ruby-version`
     fi
+    RAILS_ENV=production
+    bundle config set without 'development test'
     bundle update
-    bundle install
+    RAILS_ENV=production bundle install
     yarn install --check-files
+    ./bin/webpack
     RAILS_ENV=production bundle exec rake db:migrate
   else
     git clone $repo $app_name
@@ -93,12 +97,17 @@ ssh $user@$server -i $key << EOF
   cd $remote_app_location/$app_name
   password=\`echo 'Rails.application.credentials.production[:db_password]' | RAILS_ENV=production bundle exec rails c | tail -2 | head -1 | tr -d '"'\`
   sudo -u postgres psql -c "CREATE user $app_name PASSWORD '\$password' createdb";
+  RAILS_ENV=production
+  bundle config set without 'development test'  
   bundle install
+  spring stop
   yarn install --check-files
-  RAILS_ENV=production ./bin/rake db:create
-  RAILS_ENV=production ./bin/rake db:migrate
-  RAILS_ENV=production ./bin/rake db:seed
-  RAILS_ENV=production ./bin/rails assets:precompile
+  ls bin
+  ./bin/webpack
+  RAILS_ENV=production bundle exec rake db:create
+  RAILS_ENV=production bundle exec rake db:migrate
+  RAILS_ENV=production bundle exec rake db:seed
+  RAILS_ENV=production bundle exec rails assets:precompile
   sudo service nginx reload
 EOF
  echo "Done!"
